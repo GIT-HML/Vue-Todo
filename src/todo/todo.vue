@@ -5,11 +5,13 @@
       class="add-input"
       autofocus="autofocus"
       placeholder="接下去要做什么?"
-      @keyup.enter="addTodo"
-    >
-    <item :todo="todo"></item>
+      @keyup.enter="addTodo">
+    <item :todo="todo"
+          v-for="todo in filterTodos"
+          :key="todo.id"
+          @del="deleteTodo"></item>
     <tabs :filter="filter"
-          :todos="todo"
+          :todos="todos"
           @toggle="toggleFilter"
           @clearAllCompleted="clearAllCompleted"></tabs>
   </section>
@@ -19,6 +21,8 @@
 import item from './items.vue'
 import tabs from './tabs.vue'
 
+let id = 0
+
 export default {
   components: {
     item,
@@ -26,23 +30,40 @@ export default {
   },
   data () {
     return {
-      todo: {
-        id: 0,
-        content: 'this is todo',
-        completed: false
-      },
+      todos: [],
       filter: 'all'
     }
   },
+  computed: {
+    filterTodos () {
+      if (this.filter === 'all') {
+        return this.todos
+      }
+
+      const completed = this.filter === 'completed'
+      // 将todos数组中，completed为true的值过滤出来，并返回一个新数组
+      return this.todos.filter(todo => completed === todo.completed)
+    }
+  },
   methods: {
-    addTodo () {
-
+    addTodo (e) {
+      if (e.target.value.trim()) {
+        this.todos.unshift({
+          id: id++,
+          content: e.target.value.trim(),
+          completed: false
+        });
+        e.target.value = ''
+      }
     },
-    toggleFilter () {
-
+    deleteTodo (id) {
+      this.todos.splice(this.todos.findIndex(todo.id === id), 1)
+    },
+    toggleFilter (state) {
+      this.filter = state
     },
     clearAllCompleted () {
-
+      this.todos = this.todos.filter(todo => !todo.completed)
     }
   }
 }
