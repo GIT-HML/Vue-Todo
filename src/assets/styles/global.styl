@@ -4,13 +4,20 @@ html, body {
   left: 0
   right: 0
   bottom: 0
+  padding: 0
+  margin: 0
 }
 
 
 body {
-  background-image: url('../images/background-image.jpg');
+  background-image: url('../images/bg.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  color: #4d4d4d;
+  font-smoothing: antialiased;
+  font-weight: 300;
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   &::before {
     content: '';
@@ -19,7 +26,7 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: #555;
-    opacity: 0.5;
+    background-color: #999;
+    opacity: 0.6;
   }
 }

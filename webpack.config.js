@@ -25,7 +25,7 @@ const config = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(jpg|jpen|png|gif|svg)$/,
+        test: /\.(jpg|jpeg|png|gif|svg)$/,
         use: [
           {
             loader: 'url-loader',
@@ -51,7 +51,7 @@ const config = {
 if (isDev) {
   config.devtool = '#cheap-module-eval-sourve-map'
   config.devServer = {
-    port: 8000,
+    port: 8080,
     host: '0.0.0.0',
     overlay: {
       errors: true
