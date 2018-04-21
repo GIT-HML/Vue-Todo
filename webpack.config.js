@@ -1,7 +1,7 @@
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin") // 貌似 webpack4 已经取消
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
