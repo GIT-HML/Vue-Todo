@@ -37,14 +37,14 @@ if (isDev) {
         {
           test: /\.css$/,
           use: [
-            'style-loader',
+            'vue-style-loader',
             'css-loader'
           ]
         },
         {
           test: /\.styl$/,
           use: [
-            'style-loader',
+            'vue-style-loader',
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -58,7 +58,7 @@ if (isDev) {
         {
           test: /\.s?[ac]ss$/,
           use: [
-            'style-loader',
+            'vue-style-loader',
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -132,14 +132,14 @@ if (isDev) {
       ]
     },
     optimization: {
-      minimizer: [
-        new UglifyJsPlugin({
-          cache: true,
-          // paraller: true, // 未知问题，会报错
-          sourceMap: true
-        }),
-        new OptimizeCSSAssetsPlugin()
-      ],
+      // minimizer: [
+      //   new UglifyJsPlugin({
+      //     cache: true,
+      //     // paraller: true, // 未知问题，会报错
+      //     sourceMap: true
+      //   }),
+      //   new OptimizeCSSAssetsPlugin()
+      // ],
       splitChunks: {
         cacheGroups: {              // 这里开始设置缓存的 chunks
           commons: {
