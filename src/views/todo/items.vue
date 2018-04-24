@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props:{
+  props: {
     todo: {
       type: Object,
       required: true

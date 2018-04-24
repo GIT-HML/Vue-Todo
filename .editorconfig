@@ -1,0 +1,10 @@
+// 规范编辑器配置
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true     // 代码最后一行自动添加换行
+trim_trailing_whitespace = true // 自动去除空格
