@@ -1,1 +1,1 @@
-import './instence/index'
+import './instance'
