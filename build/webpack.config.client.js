@@ -2,9 +2,9 @@ const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin") // 貌似 webpack4 已经取消
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 貌似 webpack4 已经取消
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -78,8 +78,8 @@ if (isDev) {
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: "[name].css",
-        chunkFilename: "[id].css"
+        filename: '[name].css',
+        chunkFilename: '[id].css'
       })
     ])
   })
@@ -97,8 +97,8 @@ if (isDev) {
         {
           test: /\.css$/,
           use: [
-            MiniCssExtractPlugin.loader,  // replace ExtractTextPlugin.extract({..})
-            "css-loader"
+            MiniCssExtractPlugin.loader, // replace ExtractTextPlugin.extract({..})
+            'css-loader'
           ]
         },
         {
@@ -132,27 +132,36 @@ if (isDev) {
       ]
     },
     optimization: {
-      // minimizer: [
-      //   new UglifyJsPlugin({
-      //     cache: true,
-      //     // paraller: true, // 未知问题，会报错
-      //     sourceMap: true
-      //   }),
-      //   new OptimizeCSSAssetsPlugin()
-      // ],
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          // paraller: true, // 未知问题，会报错
+          sourceMap: true
+        }),
+        new OptimizeCSSAssetsPlugin()
+      ],
       splitChunks: {
-        cacheGroups: {              // 这里开始设置缓存的 chunks
+        // 这里开始设置缓存的 chunks
+        cacheGroups: {
           commons: {
-            chunks: 'initial',      // 必须三选一： "initial" | "all" | "async"(默认就是异步)
-            minSize: 0,             // 最小尺寸，默认0,
-            minChunks: 2,           // 最小 chunk ，默认1
-            maxInitialRequests: 5   // 最大初始化请求书，默认1
+            // 必须三选一： "initial" | "all" | "async"(默认就是异步)
+            chunks: 'initial',
+            // 最小尺寸，默认0,
+            minSize: 0,
+            // 最小 chunk ，默认1
+            minChunks: 2,
+            // 最大初始化请求书，默认1
+            maxInitialRequests: 5
           },
           vendor: {
-            test: /node_modules/,   // 正则规则验证，如果符合就提取 chunk
-            chunks: 'initial',      // 必须三选一： "initial" | "all" | "async"(默认就是异步)
-            name: 'vendor',         // 要缓存的 分隔出来的 chunk 名称
-            priority: 10,           // 缓存组优先级
+            // 正则规则验证，如果符合就提取 chunk
+            test: /node_modules/,
+            // 必须三选一： "initial" | "all" | "async"(默认就是异步)
+            chunks: 'initial',
+            // 要缓存的 分隔出来的 chunk 名称
+            name: 'vendor',
+            // 缓存组优先级
+            priority: 10,
             enforce: true
           }
         }
@@ -162,7 +171,8 @@ if (isDev) {
     plugins: defaultPlugins.concat([
       new MiniCssExtractPlugin({
         filename: 'css/app.[name].[contenthash:8].css',
-        chunkFilename: 'css/app.[contenthash:8].css'  // use contenthash *
+        // use contenthash *
+        chunkFilename: 'css/app.[contenthash:8].css'
       })
     ])
   })
